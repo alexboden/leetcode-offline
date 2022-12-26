@@ -1,44 +1,22 @@
-Basically a fork of [yask's repo](https://github.com/yask123/all_leetcode_questions) but I don't think the repo name 'all-leetcode-questions' fits given the smaller amount of questions here.
+# About
+Take your leetcode problems offline. Generates pdfs, html files and starter code files for each problem in `config.py`'s `LIST_OF_QUESTIONS` list. Currently it is set to the Blind 75 list `blind_75_links.txt`.
 
-Repo is updated to work with LeetCode's GraphQL API and only includes the [Blind 75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU). The code should theoretically work with any Leetcode question list though. 
+Uses the Leetcode's GraphQL API to get the problem description and starter code. This repo is a modification of https://github.com/raiyansayeed/leetcode-download-questions
 
-Questions are currently only available in PDF format. 
+# Configuration
+You can change the list used, default language and file extension for the starter code in `config.py`.
+The output directory is set to `output/` by default. Sub directories are created for each classification of problem as denoted with the "~" in the problem list. Each question is saved in a sub directory of its classification.
 
-Feel free to submit a PR to include other lists e.g topic specific lists.
+# Dependencies
+See `requirements.txt` for Python dependencies. 
 
-### Usage
+> **NOTE** This project uses https://pypi.org/project/pdfkit/ to convert HTML to PDF. You must install wkhtmltopdf, for MacOS you can install via brew: `brew install homebrew/cask/wkhtmltopdf`. 
 
-You can download '.pdf' file from this repo and view it however you want. 
-
-### Building PDF 
-
-This repo relies on WeasyPrint which itself has some annoying dependencies to install. Refer to their [documentation](https://doc.courtbouillon.org/weasyprint/latest/first_steps.html) for platform specific installation steps. 
-
-__NOTE__ For MacOS you may also need to install LibMagic with `brew install libmagic`
-
-Run the following to install other dependencies 
-```python
-virtualenv .venv
-source .venv/bin/activate
+# Usage
+```
 pip install -r requirements.txt
+python main.py
 ```
 
-In virtualenv, run `python3 export_all_questions.py` to generate PDF. 
-
-### Updating questions
-
-Add the new question link in the file `question_links.txt` and run `export_all_questions.py` python script. 
-
-To get all questions in a LeetCode list, visit a LeetCode URL with problem links visible on the page e.g `https://leetcode.com/list/xi4ci4ig/`. Open up the dev console and run the following code. Make sure all problem links are visible e.g extend list view > 50 to show all problem links if needed. 
-
-```
-var links = document.getElementsByTagName('a');
-var all_links = Array.prototype.slice.call(links);
-var problems_str = "";
-all_links.forEach(function(val) {
-    if (val.href.includes('/problems/') && !val.href.includes('/solution')) {
-        problems_str = problems_str.concat(`${val.href}\n`)
-    }
-});
-console.log(problems_str)
-```
+# Notes
+The code is not able to download paid questions.
