@@ -18,5 +18,8 @@ pip install -r requirements.txt
 python main.py
 ```
 
+# Output
+See the output directory for sample output.
+
 # Notes
 The code is not able to download paid questions.
